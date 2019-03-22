@@ -26,6 +26,8 @@ class Oystercard
 	end
 
 	def touch_in
-		
+		fail "insufficient balance to touch in" if @balance < 1
+		@in_journey = true
+
 	end
 end
