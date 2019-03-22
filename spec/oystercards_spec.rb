@@ -30,6 +30,7 @@ describe Oystercard do
 		end
 
 		it 'can touch in' do
+			subject.top_up(10)
 			subject.touch_in
 			expect(subject).to be_in_journey
 		end
@@ -41,9 +42,10 @@ describe Oystercard do
 
 	describe '#touch_out' do
 		it 'can touch out' do
+			subject.top_up(10)
 			subject.touch_in
 			subject.touch_out
-			expect(subject).not_to_be_in_journey
+			expect{ subject.touch_out }.to change{ subject.balance }.by(- Oystercard::MINIMUM_CHARGE)
 		end
 	end
  
